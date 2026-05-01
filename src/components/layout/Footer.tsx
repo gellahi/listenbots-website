@@ -64,14 +64,14 @@ export function Footer() {
                 aria-label="LinkedIn"
                 className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-border-subtle text-text-secondary hover:text-accent-green hover:border-border-accent transition-colors"
               >
-                <Linkedin className="w-4 h-4" />
+                <LinkedInIcon className="w-4 h-4" />
               </Link>
               <Link
                 href="#"
                 aria-label="X / Twitter"
                 className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-border-subtle text-text-secondary hover:text-accent-green hover:border-border-accent transition-colors"
               >
-                <Twitter className="w-4 h-4" />
+                <XIcon className="w-4 h-4" />
               </Link>
             </div>
           </div>

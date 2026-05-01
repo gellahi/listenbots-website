@@ -69,7 +69,7 @@ export function FAQ() {
           className="mt-14"
         >
           <motion.div variants={fadeInUp}>
-            <Accordion type="single" collapsible className="space-y-3">
+            <Accordion className="space-y-3">
               {faqs.map((faq, i) => (
                 <AccordionItem
                   key={i}
