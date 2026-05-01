@@ -48,7 +48,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           <div className="md:col-span-5 space-y-5">
-            <Logo showCaption />
+            <Logo />
             <p className="font-display font-semibold text-2xl text-text-primary leading-tight max-w-xs">
               Quality you can see,
               <br />
