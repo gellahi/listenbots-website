@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -54,22 +54,43 @@ type ThemeToggleProps = {
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const cleanupTimer = useRef<number | null>(null);
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    return () => {
+      if (cleanupTimer.current !== null) {
+        window.clearTimeout(cleanupTimer.current);
+      }
+      document.documentElement.classList.remove("theme-changing");
+    };
+  }, []);
 
   const isDark = mounted && resolvedTheme === "dark";
 
   const onToggle = () => {
     const next = isDark ? "light" : "dark";
-    // Add a global transition flag for the duration of the swap so
-    // every painted color (including ones not in the :where() list)
-    // animates buttery smooth.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTheme(next);
+      return;
+    }
+
+    // Add a short global transition flag for the duration of the theme swap.
     const root = document.documentElement;
+    if (cleanupTimer.current !== null) {
+      window.clearTimeout(cleanupTimer.current);
+    }
     root.classList.add("theme-changing");
-    setTheme(next);
-    window.setTimeout(() => {
-      root.classList.remove("theme-changing");
-    }, 380);
+
+    // Let the class apply first, then flip theme on the next frame.
+    window.requestAnimationFrame(() => {
+      setTheme(next);
+      cleanupTimer.current = window.setTimeout(() => {
+        root.classList.remove("theme-changing");
+        cleanupTimer.current = null;
+      }, 260);
+    });
   };
 
   return (
@@ -96,7 +117,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
             initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
-            transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
             className="inline-flex"
           >
             {isDark ? (

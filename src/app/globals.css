@@ -159,48 +159,13 @@
 }
 
 /* ---------- Buttery theme transition ---------- */
-/* Always-on, low-cost transition on color-related properties.
-   Uses :where() so specificity is 0 — Tailwind's transition-* utilities
-   on individual elements still win and keep their own timing for hover. */
+/* Keep base transitions lightweight and scope full-page transitions
+   only to the short theme-switch window to avoid constant repaint churn. */
 @layer base {
-  :where(
-    html,
-    body,
-    header,
-    footer,
-    section,
-    article,
-    aside,
-    main,
-    nav,
-    div,
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    span,
-    a,
-    button,
-    li,
-    ul,
-    ol,
-    figure,
-    blockquote,
-    code,
-    pre,
-    img,
-    svg,
-    path,
-    rect,
-    line
-  ) {
-    transition-property: background-color, border-color, color, fill, stroke,
-      box-shadow, opacity;
-    transition-duration: 320ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  :where(html, body) {
+    transition-property: background-color, color;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -210,17 +175,14 @@
     }
   }
 
-  /* Theme-switch boost: applied on <html> for ~350ms during a toggle so
-     every paintable property animates uniformly, even on elements that
-     opt out of the global :where() rule (hover-state utilities, etc). */
+  /* Theme-switch boost: applied on <html> for ~320ms during a toggle. */
   .theme-changing,
   .theme-changing *,
   .theme-changing *::before,
   .theme-changing *::after {
-    transition-property: background-color, border-color, color, fill, stroke,
-      box-shadow, opacity !important;
-    transition-duration: 350ms !important;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-property: background-color, border-color, color, fill, stroke !important;
+    transition-duration: 240ms !important;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 }
 
