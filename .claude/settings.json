@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm install framer-motion lucide-react clsx tailwind-merge class-variance-authority next-themes react-intersection-observer @vercel/analytics @radix-ui/react-dialog @radix-ui/react-accordion @radix-ui/react-tooltip @radix-ui/react-slot --legacy-peer-deps)",
+      "PowerShell(npx --yes shadcn@latest init --base-color zinc --yes)",
+      "PowerShell(npx --yes shadcn@latest init --yes --defaults)",
+      "PowerShell(npx tsc --noEmit 2>&1)"
+    ]
+  }
+}
