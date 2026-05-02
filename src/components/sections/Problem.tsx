@@ -75,9 +75,9 @@ export function Problem() {
               <motion.li
                 key={pain.text}
                 variants={fadeInUp}
-                className="group relative flex items-start gap-4 p-6 rounded-lg bg-bg-secondary border border-border-subtle border-l-2 border-l-[#ef4444]/60 hover:border-l-[#ef4444] transition-colors"
+                className="group relative flex items-start gap-4 p-6 rounded-lg bg-bg-secondary border border-border-subtle border-l-2 border-l-pain/60 hover:border-l-pain transition-colors"
               >
-                <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-md bg-[#ef4444]/10 text-[#ef4444]">
+                <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-md bg-pain-bg text-pain">
                   <Icon className="w-4.5 h-4.5" strokeWidth={2} />
                 </span>
                 <p className="text-text-primary text-base sm:text-[1.0625rem] leading-relaxed">

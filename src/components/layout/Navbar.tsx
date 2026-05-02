@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -70,6 +71,7 @@ export function Navbar() {
         </ul>
 
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <Link
             href="#contact"
             className="group inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-accent-green border border-border-accent hover:bg-accent-green/10 transition-colors"
@@ -79,14 +81,17 @@ export function Navbar() {
           </Link>
         </div>
 
-        <button
-          onClick={() => setMobileOpen((o) => !o)}
-          className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md text-text-primary hover:bg-bg-secondary transition-colors"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        <div className="lg:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileOpen((o) => !o)}
+            className="inline-flex items-center justify-center w-10 h-10 rounded-md text-text-primary hover:bg-bg-secondary transition-colors"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>
